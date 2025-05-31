@@ -18,7 +18,7 @@ function FileUpload({ onFileParsed  }) {
             const parts = line.split('|');
             if (parts.length !== 3) {
               errors.push(`Invalid format on line ${index + 1}: expected 3 values separated by "|"`);
-              return; // skip this line
+              return;
             }
             
             let [amount, coin, buyPrice] = parts;
@@ -28,14 +28,13 @@ function FileUpload({ onFileParsed  }) {
       
             if (isNaN(amount) || !coin || isNaN(buyPrice)) {
               errors.push(`Invalid data on line ${index + 1}: check amount, coin symbol, and buy price.`);
-              return; // skip this line
+              return; 
             }
       
             parsed.push({ amount, coin, buyPrice });
           });
       
           if (errors.length > 0) {
-            // You can do something with errors here, like logging or showing user feedback
             console.warn('File parsing warnings:', errors);
           }
       
