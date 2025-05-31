@@ -14,6 +14,7 @@ function PortfolioTable({ portfolio }) {
                         <th>Initial Value</th>
                         <th>Current Value</th>
                         <th>% Change</th>
+                        <th>Sentiment</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,12 +22,15 @@ function PortfolioTable({ portfolio }) {
                         <tr key={index}>
                             <td>{item.coin}</td>
                             <td>{item.amount}</td>
-                            <td>${item.buyPrice.toFixed(2)}</td>
-                            <td>${item.currentPrice?.toFixed(2) ?? '—'}</td>
+                            <td>${item.buyPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })}</td>
+                            <td>${item.currentPrice?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 }) ?? '—'}</td>
                             <td>${(item.amount * item.buyPrice).toFixed(2)}</td>
                             <td>${(item.amount * item.currentPrice).toFixed(2)}</td>
                             <td className={item.change >= 0 ? 'positive' : 'negative'}>
                                 {item.change?.toFixed(2)}%
+                            </td>
+                            <td className={`sentiment ${item.sentiment}`}>
+                                {item.sentiment}
                             </td>
                         </tr>
                     ))}

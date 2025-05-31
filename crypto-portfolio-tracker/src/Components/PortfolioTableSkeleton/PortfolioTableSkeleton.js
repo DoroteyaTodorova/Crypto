@@ -11,11 +11,13 @@ function PortfolioTableSkeleton({ rows = 5 }) {
           <th>Buy Price</th>
           <th>Current Price</th>
           <th>Change (%)</th>
+          <th>Sentiment</th>
         </tr>
       </thead>
       <tbody>
         {[...Array(rows)].map((_, i) => (
           <tr key={i} className="skeleton-row">
+            <td><div className="skeleton-box" /></td>
             <td><div className="skeleton-box" /></td>
             <td><div className="skeleton-box" /></td>
             <td><div className="skeleton-box" /></td>
