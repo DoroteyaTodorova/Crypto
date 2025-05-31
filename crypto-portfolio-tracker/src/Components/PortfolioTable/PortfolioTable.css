@@ -1,0 +1,33 @@
+.portfolio-table-container {
+    padding: 2rem;
+    overflow-x: auto;
+}
+
+.portfolio-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.portfolio-table th,
+.portfolio-table td {
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    text-align: center;
+    color: white;
+}
+
+.portfolio-table th {
+    background-color: #3377CC;
+    color: white;
+}
+
+.positive {
+    color: green;
+    font-weight: bold;
+}
+
+.negative {
+    color: red;
+    font-weight: bold;
+}

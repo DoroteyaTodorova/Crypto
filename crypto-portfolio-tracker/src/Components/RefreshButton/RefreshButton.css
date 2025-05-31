@@ -1,0 +1,33 @@
+.refresh-button {
+    margin: 10px;
+    padding: 8px 16px;
+    background-color: #3377CC;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    height: 2.8rem;
+}
+
+.refresh-button:hover {
+    background-color: #0056b3;
+}
+
+.input-interval {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    background-color: #3377CC;
+    padding: 0.65rem;
+    border-radius: 5px;
+}
+
+.input-field {
+    border-radius: 5px;
+    width: 2rem;
+    background-color: #2d6eaf;
+    color: white;
+}
