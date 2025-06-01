@@ -28,9 +28,10 @@ function App() {
         }),
       });
 
-      if (!res.ok) throw new Error(`Backend error: ${res.status}`);
-      const updatedPortfolio = await res.json();
-      setPortfolio(updatedPortfolio);
+      if (res.ok) {
+        const updatedPortfolio = await res.json();
+        setPortfolio(updatedPortfolio);
+      }
     } catch (error) {
       console.error('Failed to fetch portfolio data:', error);
       alert('There was a problem fetching the portfolio data. Please try again later.');
