@@ -26,8 +26,8 @@ function PortfolioTable({ portfolio }) {
                             <td>${item.currentPrice?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 }) ?? '—'}</td>
                             <td>${(item.amount * item.buyPrice).toFixed(2)}</td>
                             <td>${(item.amount * item.currentPrice).toFixed(2)}</td>
-                            <td className={item.change >= 0 ? 'positive' : 'negative'}>
-                                {item.change?.toFixed(2)}%
+                            <td className={item.changePercent >= 0 ? 'positive' : 'negative'}>
+                                {item.changePercent?.toFixed(2)}%
                             </td>
                             <td className={`sentiment ${item.sentiment}`}>
                                 {item.sentiment}
