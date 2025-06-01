@@ -11,6 +11,8 @@
 # production
 /build
 
+#app settings
+appsettings.json
 # misc
 .DS_Store
 .env
