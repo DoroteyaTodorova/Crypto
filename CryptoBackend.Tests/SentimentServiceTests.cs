@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using CryptoBackend.Service;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -16,12 +17,14 @@ namespace CryptoBackend.Tests
         private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
         private readonly Mock<IConfiguration> _configMock;
         private readonly Mock<ILogger<SentimentService>> _loggerMock;
+        private readonly Mock<IMemoryCache> _cacheMock;
 
         public SentimentServiceTests()
         {
             _httpClientFactoryMock = new Mock<IHttpClientFactory>();
             _configMock = new Mock<IConfiguration>();
             _loggerMock = new Mock<ILogger<SentimentService>>();
+            _cacheMock = new Mock<IMemoryCache>();
         }
 
         private HttpClient CreateHttpClient(HttpResponseMessage response)
@@ -77,7 +80,7 @@ namespace CryptoBackend.Tests
             _httpClientFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>())).Returns(httpClient);
             _configMock.Setup(c => c["AppBaseUrl"]).Returns("https://fake.api");
 
-            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object);
+            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object, _cacheMock.Object);
 
             // Act
             var result = await service.AnalyzeSentimentAsync(coin);
@@ -93,7 +96,7 @@ namespace CryptoBackend.Tests
             _httpClientFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>())).Returns(httpClient);
             _configMock.Setup(c => c["AppBaseUrl"]).Returns("https://fake.api");
 
-            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object);
+            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object, _cacheMock.Object);
 
             var result = await service.AnalyzeSentimentAsync("BTC");
 
@@ -112,7 +115,7 @@ namespace CryptoBackend.Tests
             _httpClientFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>())).Returns(httpClient);
             _configMock.Setup(c => c["AppBaseUrl"]).Returns("https://fake.api");
 
-            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object);
+            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object, _cacheMock.Object);
 
             var result = await service.AnalyzeSentimentAsync("BTC");
 
@@ -145,7 +148,7 @@ namespace CryptoBackend.Tests
             _httpClientFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>())).Returns(httpClient);
             _configMock.Setup(c => c["AppBaseUrl"]).Returns("https://fake.api");
 
-            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object);
+            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object, _cacheMock.Object);
 
             var result = await service.AnalyzeSentimentAsync("BTC");
 
@@ -158,7 +161,7 @@ namespace CryptoBackend.Tests
             _httpClientFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>())).Throws<Exception>();
             _configMock.Setup(c => c["AppBaseUrl"]).Returns("https://fake.api");
 
-            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object);
+            var service = new SentimentService(_httpClientFactoryMock.Object, _configMock.Object, _loggerMock.Object, _cacheMock.Object);
 
             var result = await service.AnalyzeSentimentAsync("BTC");
 

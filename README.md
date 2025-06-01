@@ -40,9 +40,9 @@ A web application for uploading cryptocurrency portfolios, retrieving real-time 
 ### Frontend (React)
 1. Navigate to the frontend project directory (crypto-portfolio-tracker).
 2. Install dependencies:
--npm install
+npm install
 3. Run the app:
--npm start
+npm start
 
 ### Usage Instructions
 Once both backend and frontend are running:
