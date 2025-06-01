@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text;
 using CryptoBackend.Interface;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace CryptoBackend.Service
 {
@@ -9,19 +10,27 @@ namespace CryptoBackend.Service
         private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _config;
         private readonly ILogger<SentimentService> _logger;
+        private readonly IMemoryCache _cache;
 
         public SentimentService(
             IHttpClientFactory clientFactory,
             IConfiguration config,
-            ILogger<SentimentService> logger)
+            ILogger<SentimentService> logger,
+            IMemoryCache cache)
         {
             _clientFactory = clientFactory;
             _config = config;
             _logger = logger;
+            _cache = cache;
         }
 
         public async Task<string> AnalyzeSentimentAsync(string coinSymbol)
         {
+            if (_cache.TryGetValue(coinSymbol, out string cachedSentiment))
+            {
+                _logger.LogDebug("Returning cached sentiment for {Coin}", coinSymbol);
+                return cachedSentiment;
+            }
             try
             {
                 var client = _clientFactory.CreateClient();
@@ -96,9 +105,12 @@ namespace CryptoBackend.Service
                             return "N/A";
                         }
 
-                        return (label == "positive" || label == "negative") && score >= 0.4 && score <= 0.6
+                        var sentiment = (label == "positive" || label == "negative") && score >= 0.4 && score <= 0.6
                             ? "Neutral"
                             : char.ToUpper(label[0]) + label[1..];
+
+                        _cache.Set(coinSymbol, sentiment, TimeSpan.FromHours(12));
+                        return sentiment;
                     }
 
                     _logger.LogWarning("Sentiment data missing 'label' or 'score' for {Coin}.", coinSymbol);

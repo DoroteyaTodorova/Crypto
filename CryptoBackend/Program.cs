@@ -14,6 +14,7 @@ builder.Host.UseSerilog();
 // Add services
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
+builder.Services.AddMemoryCache();
 
 builder.Services.AddScoped<ICoinLoreService, CoinLoreService>();
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
