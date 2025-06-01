@@ -13,6 +13,7 @@
 
 #app settings
 appsettings.json
+CryptoBackend/appsettings.json
 # misc
 .DS_Store
 .env
