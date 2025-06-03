@@ -3,6 +3,7 @@ import './RefreshButton.css';
 import { FaSyncAlt } from 'react-icons/fa';
 
 function RefreshButton({ onClick, refreshInterval = 300000, setRefreshInterval }) {
+  const minuteInSeconds = 60000;
     useEffect(() => {
         const interval = setInterval(() => {
             onClick();
@@ -19,15 +20,15 @@ function RefreshButton({ onClick, refreshInterval = 300000, setRefreshInterval }
               className='input-field'
               type="number"
               min="1"
-              value={refreshInterval / 60000}
-              onChange={(e) => setRefreshInterval(Number(e.target.value) * 60000)}
+              value={refreshInterval / minuteInSeconds}
+              onChange={(e) => setRefreshInterval(Number(e.target.value) * minuteInSeconds)}
             />
             min
           </label>
           <button
             className="refresh-button"
             onClick={onClick}
-            title={`Refresh (every ${refreshInterval / 60000} min)`}
+            title={`Refresh (every ${refreshInterval / minuteInSeconds} min)`}
           >
             <FaSyncAlt className="refresh-icon" />
           </button>
