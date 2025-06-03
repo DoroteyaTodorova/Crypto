@@ -48,22 +48,22 @@ namespace CryptoBackend.Tests
             // Arrange
             var coin = "BTC";
             var newsJson = """
-        {
-          "results": [
-            { "title": "Bitcoin surges past $30k" },
-            { "title": "BTC adoption increases" }
-          ]
-        }
-        """;
+            {
+              "results": [
+                { "title": "Bitcoin surges past $30k" },
+                { "title": "BTC adoption increases" }
+              ]
+            }
+            """;
 
             var sentimentJson = """
-        [
-          {
-            "label": "positive",
-            "score": 0.85
-          }
-        ]
-        """;
+            [
+              {
+                "label": "positive",
+                "score": 0.85
+              }
+            ]
+            """;
 
             var httpClient = CreateHttpClientSequence(new[]
             {
@@ -75,7 +75,7 @@ namespace CryptoBackend.Tests
             {
                 Content = new StringContent(sentimentJson, Encoding.UTF8, "application/json")
             }
-        });
+            });
 
             _httpClientFactoryMock.Setup(f => f.CreateClient(It.IsAny<string>())).Returns(httpClient);
             _configMock.Setup(c => c["AppBaseUrl"]).Returns("https://fake.api");
