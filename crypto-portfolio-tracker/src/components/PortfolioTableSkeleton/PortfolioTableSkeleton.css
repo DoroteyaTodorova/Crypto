@@ -1,0 +1,42 @@
+.portfolio-table-skeleton {
+    width: 95%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    padding: 2rem;
+    margin: 2rem;
+  }
+
+  .portfolio-table-skeleton th,
+  .portfolio-table-skeleton td {
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    text-align: center;
+    color: white;
+  }
+  .portfolio-table-skeleton th {
+    background-color: #3377CC;
+    color: white;
+}
+  .skeleton-row .skeleton-box {
+    height: 20px;
+    background: linear-gradient(
+        90deg,
+        #cce4f7 25%,
+        #99c2f0 37%,
+        #cce4f7 63%
+    );
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+    border-radius: 4px;
+    color: white;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  

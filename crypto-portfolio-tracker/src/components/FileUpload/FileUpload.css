@@ -1,0 +1,24 @@
+.file-upload-container {
+    text-align: center;
+    margin: 2rem;
+}
+
+.upload-button {
+    background-color: #3377CC;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+    background-color: #0056b3;
+}
+
+.hidden-file-input {
+    display: none;
+}
+
